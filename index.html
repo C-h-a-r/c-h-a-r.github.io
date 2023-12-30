@@ -30,23 +30,8 @@
   </head>
   <body onresize="resize_canvas()">
     <!-- Char Main Image -->
-    <img
-      class="hover-effect"
-      src="./char.png"
-      style="
-        position: absolute;
-        top: 5vh;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: 30%;
-        height: auto;
-      "
-    />
-    
+    <img class="hover-effect char-main-pfp" src="./char.png" />
 
-
-   
     <!-- Stars Canvas -->
     <canvas style="z-index: 0" id="bgCanvas"></canvas>
 
@@ -349,6 +334,23 @@
       transform: scale(1.1);
       transition: 0.2s;
     }
+
+    .char-main-pfp {
+      position: absolute;
+      top: 5vh;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 40vw;
+      height: 60vh;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .char-main-pfp {
+        width: 80vw;
+        height: 50vh;
+      }
+    }
   </style>
   <!-- Script  -->
   <script>
@@ -459,23 +461,27 @@
     animate();
   </script>
   <script>
- const baseUrl = 'https://api.github.com';
-async function getGithubUserInfo(userName) {
-  try {
-    const response = await fetch(`${baseUrl}/users/${userName}`);
-    const json = await response.json();
+    const baseUrl = "https://api.github.com";
+    async function getGithubUserInfo(userName) {
+      try {
+        const response = await fetch(`${baseUrl}/users/${userName}`);
+        const json = await response.json();
 
-    const followers = document.getElementById("github-follower-count");
-    const repos = document.getElementById("github-repo-count");
+        const followers = document.getElementById("github-follower-count");
+        const repos = document.getElementById("github-repo-count");
 
-    followers.innerHTML = "<strong>" + json.followers + "</strong> <small><i>Followers</i></small>";
-    repos.innerHTML = "<strong> " + json.public_repos + "</strong> <small><i>Repositories</i></small>"
-    
-  
-   } catch(error) {
-     console.log(error)
-  }
-}
-   getGithubUserInfo('C-h-a-r')
+        followers.innerHTML =
+          "<strong>" +
+          json.followers +
+          "</strong> <small><i>Followers</i></small>";
+        repos.innerHTML =
+          "<strong> " +
+          json.public_repos +
+          "</strong> <small><i>Repositories</i></small>";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getGithubUserInfo("C-h-a-r");
   </script>
 </html>
